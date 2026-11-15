@@ -1,0 +1,51 @@
+services:
+  # ── OWASP ZAP daemon ────────────────────────────────────────────────────────
+  # Hanya bind ke 127.0.0.1 — sesuai aturan zap-api-tools & scope-guardrails.
+  # API key diambil dari env; JANGAN hardcode di sini.
+  zap:
+    image: ghcr.io/zaproxy/zaproxy:stable
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:8080"
+    command:
+      - zap.sh
+      - -daemon
+      - -host
+      - "0.0.0.0"
+      - -port
+      - "8080"
+      - -config
+      - "api.key=${ZAP_API_KEY}"
+      - -config
+      - "api.addrs.addr.name=.*"
+      - -config
+      - "api.addrs.addr.regex=true"
+
+  # ── PostgreSQL + pgvector ────────────────────────────────────────────────────
+  db:
+    image: pgvector/pgvector:pg16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: zaplang
+      POSTGRES_PASSWORD: "${DB_PASSWORD:-password}"
+      POSTGRES_DB: zaplang
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:5432:5432"
+
+  # ── FastAPI app ──────────────────────────────────────────────────────────────
+  app:
+    build: .
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      - db
+      - zap
+
+volumes:
+  postgres_data:
+

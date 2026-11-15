@@ -1,0 +1,76 @@
+# Environment & Secrets (JANGAN DI-COMMIT)
+.env
+.env.*
+.env.local
+!.env.example
+*.pem
+*.key
+*.cert
+*.cer
+*.crt
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Testing & Quality Assurance
+.pytest_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+
+# Database & Persistent Volumes
+postgres_data/
+zap_data/
+*.sqlite3
+*.db
+
+# Logs, Dumps & Temporary Files
+*.log
+logs/
+loot/
+tmp/
+*.tmp
+
+# IDE & Editor Configurations
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Documentation Builds
+docs/_build/
+site/
