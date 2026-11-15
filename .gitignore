@@ -71,6 +71,10 @@ tmp/
 .DS_Store
 Thumbs.db
 
+# Internal Agent & Audit Documentation
+AGENTS.md
+TECHNICAL_AUDIT.md
+
 # Documentation Builds
 docs/_build/
 site/

@@ -253,7 +253,6 @@ The `.agents/skills/` directory contains curated methodology documents that get 
 |---|---|
 | [cheatsheet.md](cheatsheet.md) | Copy-paste Postman payloads for every API endpoint. |
 | [TUTORIAL_TEST_MANUAL_ZAP_POSTMAN.md](TUTORIAL_TEST_MANUAL_ZAP_POSTMAN.md) | Step-by-step guide for manual security testing with ZAP as intercepting proxy + Postman. |
-| [TECHNICAL_AUDIT.md](TECHNICAL_AUDIT.md) | Internal technical audit of the codebase. |
 
 ## Contributing
 
