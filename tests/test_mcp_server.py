@@ -2,7 +2,7 @@ import json
 from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 from app.schemas.rag import ChunkResult
-import mcp_server
+from app import mcp_server
 
 @pytest.mark.asyncio
 async def test_targeted_active_scan_requires_human_approval():
@@ -23,7 +23,7 @@ async def test_targeted_active_scan_enforces_scope():
 
 @pytest.mark.asyncio
 async def test_targeted_active_scan_success():
-    with patch("mcp_server.ZapClient") as mock_client_cls:
+    with patch("app.mcp_server.ZapClient") as mock_client_cls:
         mock_instance = AsyncMock()
         mock_instance.ascan_start.return_value = "scan-123"
         mock_client_cls.return_value.__aenter__.return_value = mock_instance
@@ -46,7 +46,7 @@ async def test_triage_alerts_filters_noise_and_assigns_vrt():
         {"pluginId": "40012", "alert": "Reflected XSS", "risk": "High", "url": "http://target.local/search", "param": "q", "evidence": "<script>"},
         {"pluginId": "10096", "alert": "Timestamp Disclosure", "risk": "Low", "url": "http://target.local/ts"},
     ]
-    with patch("mcp_server.ZapClient") as mock_client_cls:
+    with patch("app.mcp_server.ZapClient") as mock_client_cls:
         mock_instance = AsyncMock()
         mock_instance.alerts.return_value = raw_alerts
         mock_client_cls.return_value.__aenter__.return_value = mock_instance
@@ -88,8 +88,8 @@ async def test_rag_lookup():
         category="xss",
         score=0.92,
     )
-    with patch("mcp_server.retrieve", new_callable=AsyncMock) as mock_retrieve, \
-         patch("mcp_server.AsyncSessionLocal") as mock_session_local:
+    with patch("app.mcp_server.retrieve", new_callable=AsyncMock) as mock_retrieve, \
+         patch("app.mcp_server.AsyncSessionLocal") as mock_session_local:
         mock_session = AsyncMock()
         mock_session_local.return_value.__aenter__.return_value = mock_session
         mock_retrieve.return_value = [mock_chunk]

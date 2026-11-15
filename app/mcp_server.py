@@ -1,7 +1,14 @@
 import json
 import logging
 import re
+import sys
+from pathlib import Path
 from urllib.parse import quote_plus, urljoin
+
+_PROJECT_ROOT = Path(__file__).resolve().parent.parent
+if str(_PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(_PROJECT_ROOT))
+
 import httpx
 from fastmcp import FastMCP
 from app.core.config import settings

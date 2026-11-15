@@ -63,6 +63,7 @@ zaplang/
 │   │   ├── rag_service.py     # Chunking, Ollama embedding, ingest/retrieve
 │   │   ├── zap_client.py      # Async httpx client for ZAP REST API
 │   │   └── agent/             # LangChain agent builder (scaffold)
+│   ├── mcp_server.py          # FastMCP server (11 security tools)
 │   └── main.py                # FastAPI app entrypoint
 ├── scripts/
 │   └── ingest_skills.py       # Ingest .agents/skills/ into pgvector
@@ -74,7 +75,6 @@ zaplang/
 ├── migrations/
 │   └── 001_rag.sql            # pgvector schema (knowledge_chunks table)
 ├── .agents/skills/            # Bug bounty methodology skill files
-├── mcp_server.py              # FastMCP server (11 tools)
 ├── docker-compose.yml         # ZAP + PostgreSQL/pgvector + FastAPI
 ├── .env.example               # Template for all required env vars
 └── requirements.txt           # Python dependencies
@@ -163,7 +163,7 @@ Add this to your MCP client configuration (example for Claude Desktop `claude_de
   "mcpServers": {
     "zaplang": {
       "command": "/path/to/zaplang/.venv/bin/python",
-      "args": ["/path/to/zaplang/mcp_server.py"],
+      "args": ["/path/to/zaplang/app/mcp_server.py"],
       "env": {
         "ZAP_API_KEY": "your-zap-api-key",
         "ZAP_BASE": "http://127.0.0.1:8080",
@@ -246,13 +246,6 @@ The `.agents/skills/` directory contains curated methodology documents that get 
 | `scope-guardrails` | Scope validation rules, allowlist enforcement, rate limiting. |
 | `untrusted-output-handling` | Indirect prompt injection defense, data wrapping rules. |
 | `zap-api-tools` | ZAP REST API usage patterns and constraints. |
-
-## Additional Documentation
-
-| File | Description |
-|---|---|
-| [cheatsheet.md](cheatsheet.md) | Copy-paste Postman payloads for every API endpoint. |
-| [TUTORIAL_TEST_MANUAL_ZAP_POSTMAN.md](TUTORIAL_TEST_MANUAL_ZAP_POSTMAN.md) | Step-by-step guide for manual security testing with ZAP as intercepting proxy + Postman. |
 
 ## Contributing
 
