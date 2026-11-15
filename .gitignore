@@ -71,9 +71,13 @@ tmp/
 .DS_Store
 Thumbs.db
 
-# Internal Agent & Audit Documentation
+# Internal Agent, Audit & Root Documentation (Kecuali README.md)
+cheatsheet.md
+TUTORIAL_TEST_MANUAL_ZAP_POSTMAN.md
 AGENTS.md
 TECHNICAL_AUDIT.md
+/*.md
+!/README.md
 
 # Documentation Builds
 docs/_build/
